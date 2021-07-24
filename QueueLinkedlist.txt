@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+}*b,*f;
+
+int isFull(struct node *new)
+{
+    if(new==NULL)
+        return 1;
+    else
+        return 0;
+}
+
+int isEmpty()
+{
+    if(f == b)
+        return 1;
+    else
+        return 0;
+}
+
+void enqueue(int val)
+{
+    struct node *new = (struct node*)malloc(sizeof(struct node));
+    if(isFull(new))
+        printf("Q is full");
+    else if(f == NULL)
+    {
+        new->data = val; 
+        new->next = NULL;
+        f = new;
+        b = new;
+        printf("inserted element: %d\n",b->data);
+    }
+    else
+    {
+        new->data = val; 
+        new->next = NULL;
+        b->next = new;
+        b = new;
+        printf("inserted element: %d\n",b->data);
+    }
+}
+
+void deequeue()
+{
+    if(isEmpty())
+        printf("Q is empty\n");
+    else
+    {
+        struct node *temp;
+        temp = f;
+        f = f->next;
+        int c = temp->data;
+        free(temp);
+        printf("deleted element: %d\n",c);
+    }
+}
+
+int main()
+{
+    deequeue();
+    enqueue(16);
+    enqueue(26);
+    enqueue(46);
+    enqueue(36);
+    deequeue();
+    deequeue();
+    deequeue();
+    deequeue();
+    deequeue();
+    return 0;
+}
